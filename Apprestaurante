@@ -27,6 +27,8 @@ def cadastrar_restaurante():
     nome_res = input("Digite o nome do restaurante: ")
     restaurantes.append(nome_res)
     print(f"Restaurante {nome_res} cadastrado.")
+    input("Digite uma tecla para voltar ao menu")
+    main()
 
 def escolher_opcao():
     try:
