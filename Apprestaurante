@@ -1,6 +1,10 @@
 Apprestaurante
 
+import os
 # Simulador de códigos
+
+restaurantes = []
+
 def exibir_nome():
     print("☆Ratorante☆")
 
@@ -12,13 +16,25 @@ def exibir_opcoes():
     
 def finalizar_app(): print('Finalizando o app')
 
+def opcao_invalida():
+    print("Opção inválida!\n")
+    input("Digite uma tecla para voltar ao menu")
+    main()
+
+def cadastrar_restaurante():
+    os.system('clear)
+    print("☆Cadastrar novo restaurante: ")
+    nome_res = input("Digite o nome do restaurante: ")
+    restaurantes.append(nome_res)
+    print(f"Restaurante {nome_res} cadastrado.")
+
 def escolher_opcao():
     try:
-        opcao_escolhida = int(input('Escolha uma opção: '))
-        print('Você escolheu a opção:')
+        opcao_escolhida = int(input('Escolha uma opção: ')
 
         if opcao_escolhida == 1:
-            print("Cadastrar restaurante")
+            cadastrar_restaurante()
+            
         elif opcao_escolhida == 2:
             print("Listar restaurantes")
         elif opcao_escolhida == 3:
@@ -31,14 +47,11 @@ def escolher_opcao():
         opcao_invalida()
 
 def main():
+    os.system('clear)
     exibir_nome()
     exibir_opcoes()
     escolher_opcao()
     
 if __name__ == '__main__':
     main()
-    
-def opcao_invalida():
-    print("Opção inválida\n")
-    input("Digite uma tecla para voltar ao menu")
-    main()
+
