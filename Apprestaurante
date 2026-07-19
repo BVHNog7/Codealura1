@@ -46,6 +46,19 @@ for restaurante in restaurantes:
         print(f'- {nomres} | {categoria} | {ativo}')
 menu()
 
+def on_off():
+    os.system('clear')
+    print("☆Ativar ou desativar restaurante: ")
+    procurar = input("Informe o restaurante: ")
+    procurar = False
+
+    for restaurante in restaurantes:
+        if procurar = restaurante['nome']:
+            procurar = True
+
+
+
+
 
 def escolher_opcao():
     try:
@@ -53,9 +66,9 @@ def escolher_opcao():
         if opcao_escolhida == 1:
             cadastrar_restaurante()
         elif opcao_escolhida == 2:
-            print("Listar restaurantes")
+            listar()
         elif opcao_escolhida == 3:
-            print("Ativar restaurante")
+            on_off()
         elif opcao_escolhida == 4:
             finalizar_app()
         else:
