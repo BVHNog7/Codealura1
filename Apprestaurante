@@ -3,7 +3,7 @@ Apprestaurante
 import os
 # Simulador de códigos
 
-restaurantes = []
+restaurantes = [{'nome':'RatoranteOFC', 'categoria':'Oriental', 'ativo':True}, {}]
 
 def exibir_nome():
     print("☆Ratorante☆")
