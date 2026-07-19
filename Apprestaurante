@@ -18,9 +18,13 @@ def finalizar_app():
     os.system('clear')
     print('Finalizando o app...')
 
+def menu():
+    input('\nDigite uma tecla para voltar ao menu ')
+    main()
+
 def opcao_invalida():
     print("Opção inválida!\n")
-    input("Digite uma tecla para voltar ao menu")
+    menu()
     main()
 
 def cadastrar_restaurante():
@@ -29,8 +33,19 @@ def cadastrar_restaurante():
     nome_res = input("Digite o nome do restaurante: ")
     restaurantes.append(nome_res)
     print(f"Restaurante {nome_res} cadastrado.")
-    input("Digite uma tecla para voltar ao menu")
+    menu()
     main()
+
+def listar():
+os.system('clear')
+print("☆Lista de restaurantes: ")
+for restaurante in restaurantes:
+        nomres = restaurante['nome']
+        categoria = restaurante['categoria']
+        ativo = restaurante['ativo']
+        print(f'- {nomres} | {categoria} | {ativo}')
+menu()
+
 
 def escolher_opcao():
     try:
