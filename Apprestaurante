@@ -55,7 +55,8 @@ def on_off():
     for restaurante in restaurantes:
         if procurar = restaurante['nome']:
             procurar = True
-
+            restaurante['ativo'] = not restaurante['ativo']
+            
 
 
 
