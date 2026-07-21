@@ -39,11 +39,13 @@ def cadastrar_restaurante():
 def listar():
     os.system('clear')
     print("☆Lista de restaurantes: ")
+
+    print(f{'Nome'.ljust(22)} | {'Categoria'.ljust(20)} | 'Status')
     for restaurante in restaurantes:
         nomres = restaurante['nome']
         categoria = restaurante['categoria']
         ativo = 'ativado' if restaurante['ativo'] else 'desativado'
-        print(f'- {nomres} | {categoria} | {ativo}')
+        print(f'- {nomres.ljust(20)} | {categoria.ljust(20)} | {ativo}')
     menu()
 
 def on_off():
