@@ -37,14 +37,14 @@ def cadastrar_restaurante():
     main()
 
 def listar():
-os.system('clear')
-print("☆Lista de restaurantes: ")
-for restaurante in restaurantes:
+    os.system('clear')
+    print("☆Lista de restaurantes: ")
+    for restaurante in restaurantes:
         nomres = restaurante['nome']
         categoria = restaurante['categoria']
-        ativo = restaurante['ativo']
+        ativo = 'ativado' if restaurante['ativo'] else 'desativado'
         print(f'- {nomres} | {categoria} | {ativo}')
-menu()
+    menu()
 
 def on_off():
     os.system('clear')
@@ -56,10 +56,13 @@ def on_off():
         if procurar = restaurante['nome']:
             procurar = True
             restaurante['ativo'] = not restaurante['ativo']
-            
+            mensagem = f'O restaurante {procurar} foi ativado com sucesso!' if restaurante['ativo']
+else f'O restaurante foi desativado com êxito.'
+            print(mensagem)
 
-
-
+    if not procurar: 
+        print("Restaurante não encontrado!")
+    menu()
 
 def escolher_opcao():
     try:
