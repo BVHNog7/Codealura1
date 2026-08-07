@@ -1,9 +1,7 @@
-Apprestaurante
-
 import os
 # Simulador de códigos
 
-restaurantes = [{'nome':'RatoranteOFC', 'categoria':'Oriental', 'ativo':True}, {}]
+restaurantes = [{'nome':'RatoranteOFC', 'categoria':'Oriental', 'ativo':True}]
 
 def exibir_nome():
     print("☆Ratorante☆")
@@ -15,7 +13,7 @@ def exibir_opcoes():
     print('4. Sair\n')
     
 def finalizar_app():
-    os.system('clear')
+    os.system('cls')
     print('Finalizando o app...')
 
 def menu():
@@ -28,19 +26,21 @@ def opcao_invalida():
     main()
 
 def cadastrar_restaurante():
-    os.system('clear')
+    os.system('cls')
     print("☆Cadastrar novo restaurante: ")
     nome_res = input("Digite o nome do restaurante: ")
-    restaurantes.append(nome_res)
-    print(f"Restaurante {nome_res} cadastrado.")
+    categoria = input(f'Digite o nome da categoria do restaurante {nome_res}: ')
+    dados_do_restaurante = {'nome':nome_res, 'categoria':categoria, 'ativo':False}
+    restaurantes.append(dados_do_restaurante)
+    print(f'O restaurante {nome_res} foi cadastrado com sucesso!')
     menu()
     main()
 
 def listar():
-    os.system('clear')
+    os.system('cls')
     print("☆Lista de restaurantes: ")
 
-    print(f{'Nome'.ljust(22)} | {'Categoria'.ljust(20)} | 'Status')
+    print(f"{'Nome'.ljust(22)} | {'Categoria'.ljust(20)} | 'Status'")
     for restaurante in restaurantes:
         nomres = restaurante['nome']
         categoria = restaurante['categoria']
@@ -49,17 +49,18 @@ def listar():
     menu()
 
 def on_off():
-    os.system('clear')
+    os.system('cls')
     print("☆Ativar ou desativar restaurante: ")
     procurar = input("Informe o restaurante: ")
-    procurar = False
+    encontrado = False
 
     for restaurante in restaurantes:
-        if procurar = restaurante['nome']:
-            procurar = True
+        if procurar == restaurante['nome']:
+            encontrado = True
             restaurante['ativo'] = not restaurante['ativo']
-            mensagem = f'O restaurante {procurar} foi ativado com sucesso!' if restaurante['ativo']
-else f'O restaurante foi desativado com êxito.'
+            mensagem = (f'O restaurante {procurar} foi ativado com sucesso!'
+                         if restaurante['ativo']
+                         else f'O restaurante foi desativado com êxito.')
             print(mensagem)
 
     if not procurar: 
@@ -83,11 +84,10 @@ def escolher_opcao():
         opcao_invalida()
 
 def main():
-    os.system('clear')
+    os.system('cls')
     exibir_nome()
     exibir_opcoes()
     escolher_opcao()
     
 if __name__ == '__main__':
     main()
-
