@@ -1,93 +1,188 @@
-import os
-# Simulador de códigos
 
-restaurantes = [{'nome':'RatoranteOFC', 'categoria':'Oriental', 'ativo':True}]
+import os
+
+restaurantes = [
+    {
+        'nome': 'RestauranteOFC',
+        'categoria': 'Oriental',
+        'ativo': True
+    }
+]
+
+
+def limpar_tela():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
 
 def exibir_nome():
-    print("☆Ratorante☆")
+    print("☆ Restaurante ☆")
+
 
 def exibir_opcoes():
-    print('1. Cadastrar restaurante')
-    print('2. Listar restaurante')
-    print('3. Ativar restaurante')
-    print('4. Sair\n')
-    
-def finalizar_app():
-    os.system('cls')
-    print('Finalizando o app...')
+    print('\n1. Cadastrar restaurante')
+    print('2. Listar restaurantes')
+    print('3. Ativar ou desativar restaurante')
+    print('4. Sair')
 
-def menu():
-    input('\nDigite uma tecla para voltar ao menu ')
-    main()
 
-def opcao_invalida():
-    print("Opção inválida!\n")
-    menu()
-    main()
+def pausar():
+    input('\nPressione ENTER para voltar ao menu...')
+
 
 def cadastrar_restaurante():
-    os.system('cls')
-    print("☆Cadastrar novo restaurante: ")
-    nome_res = input("Digite o nome do restaurante: ")
-    categoria = input(f'Digite o nome da categoria do restaurante {nome_res}: ')
-    dados_do_restaurante = {'nome':nome_res, 'categoria':categoria, 'ativo':False}
+    limpar_tela()
+    print("☆ Cadastrar novo restaurante ☆\n")
+
+    nome_res = input("Digite o nome do restaurante: ").strip()
+
+    if not nome_res:
+        print("\nO nome do restaurante não pode ser vazio.")
+        return
+
+    for restaurante in restaurantes:
+        if restaurante['nome'].lower() == nome_res.lower():
+            print("\nEsse restaurante já está cadastrado!")
+            return
+
+    categoria = input(
+        f"Digite a categoria do restaurante {nome_res}: "
+    ).strip()
+
+    if not categoria:
+        print("\nA categoria não pode ser vazia.")
+        return
+
+    dados_do_restaurante = {
+        'nome': nome_res,
+        'categoria': categoria,
+        'ativo': False
+    }
+
     restaurantes.append(dados_do_restaurante)
-    print(f'O restaurante {nome_res} foi cadastrado com sucesso!')
-    menu()
-    main()
+
+    print(
+        f"\nO restaurante {nome_res} "
+        "foi cadastrado com sucesso!"
+    )
+
 
 def listar():
-    os.system('cls')
-    print("☆Lista de restaurantes: ")
+    limpar_tela()
+    print("☆ Lista de restaurantes ☆\n")
 
-    print(f"{'Nome'.ljust(22)} | {'Categoria'.ljust(20)} | 'Status'")
+    if not restaurantes:
+        print("Nenhum restaurante cadastrado.")
+        return
+
+    print(
+        f"{'Nome'.ljust(25)} | "
+        f"{'Categoria'.ljust(20)} | "
+        "Status"
+    )
+
+    print("-" * 65)
+
     for restaurante in restaurantes:
-        nomres = restaurante['nome']
+        nome = restaurante['nome']
         categoria = restaurante['categoria']
-        ativo = 'ativado' if restaurante['ativo'] else 'desativado'
-        print(f'- {nomres.ljust(20)} | {categoria.ljust(20)} | {ativo}')
-    menu()
+
+        status = (
+            'Ativado'
+            if restaurante['ativo']
+            else 'Desativado'
+        )
+
+        print(
+            f"{nome.ljust(25)} | "
+            f"{categoria.ljust(20)} | "
+            f"{status}"
+        )
+
 
 def on_off():
-    os.system('cls')
-    print("☆Ativar ou desativar restaurante: ")
-    procurar = input("Informe o restaurante: ")
+    limpar_tela()
+    print("☆ Ativar ou desativar restaurante ☆\n")
+
+    procurar = input(
+        "Informe o nome do restaurante: "
+    ).strip()
+
     encontrado = False
 
     for restaurante in restaurantes:
-        if procurar == restaurante['nome']:
-            encontrado = True
-            restaurante['ativo'] = not restaurante['ativo']
-            mensagem = (f'O restaurante {procurar} foi ativado com sucesso!'
-                         if restaurante['ativo']
-                         else f'O restaurante foi desativado com êxito.')
-            print(mensagem)
 
-    if not procurar: 
-        print("Restaurante não encontrado!")
-    menu()
+        if restaurante['nome'].lower() == procurar.lower():
+            encontrado = True
+
+            # Alterna entre True e False
+            restaurante['ativo'] = not restaurante['ativo']
+
+            if restaurante['ativo']:
+                mensagem = (
+                    f"O restaurante {restaurante['nome']} "
+                    "foi ativado com sucesso!"
+                )
+            else:
+                mensagem = (
+                    f"O restaurante {restaurante['nome']} "
+                    "foi desativado com sucesso!"
+                )
+
+            print(f"\n{mensagem}")
+            break
+
+    if not encontrado:
+        print("\nRestaurante não encontrado!")
+
 
 def escolher_opcao():
     try:
-        opcao_escolhida = int(input('Escolha uma opção: '))
+        opcao_escolhida = int(
+            input('\nEscolha uma opção: ')
+        )
+
         if opcao_escolhida == 1:
             cadastrar_restaurante()
+
         elif opcao_escolhida == 2:
             listar()
+
         elif opcao_escolhida == 3:
             on_off()
+
         elif opcao_escolhida == 4:
-            finalizar_app()
+            return False
+
         else:
-            opcao_invalida()
-    except Exception:
-        opcao_invalida()
+            print("\nOpção inválida!")
+
+    except ValueError:
+        print("\nDigite um número válido!")
+
+    return True
+
 
 def main():
-    os.system('cls')
-    exibir_nome()
-    exibir_opcoes()
-    escolher_opcao()
-    
+    while True:
+        limpar_tela()
+        exibir_nome()
+        exibir_opcoes()
+
+        continuar = escolher_opcao()
+
+        if not continuar:
+            break
+
+        pausar()
+
+    finalizar_app()
+
+
+def finalizar_app():
+    limpar_tela()
+    print("Finalizando o aplicativo...")
+    print("Até logo!")
+
+
 if __name__ == '__main__':
     main()
